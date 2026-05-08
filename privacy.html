@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Datenschutzerklärung / Privacy Policy – MRRbar</title>
+  <!-- Fonts via fonts.bunny.net – DSGVO-konform, kein IP-Transfer an Google -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,600|cabinet-grotesk:400,700,800,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #1a1a2e;
+      --card:   #22224a;
+      --border: rgba(255,255,255,0.07);
+      --green:  #00ff88;
+      --white:  #f0f0ff;
+      --muted:  #7070a0;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(26,26,46,0.85);
+    }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      color: var(--green);
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .logo-dollar {
+      width: 28px; height: 28px;
+      background: var(--green); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 0.9rem; font-weight: 700;
+    }
+    /* LANGUAGE TOGGLE */
+    .lang-toggle {
+      display: flex; gap: 4px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 4px;
+    }
+    .lang-btn {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      font-weight: 600; letter-spacing: 0.04em;
+      padding: 5px 14px; border-radius: 5px; border: none;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+      background: transparent; color: var(--muted);
+    }
+    .lang-btn.active {
+      background: var(--green); color: var(--bg);
+    }
+    main {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 24px 80px;
+    }
+    h1 {
+      font-size: 2rem; font-weight: 900;
+      letter-spacing: -0.035em;
+      margin-bottom: 8px;
+    }
+    .last-updated {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; color: var(--muted);
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 1.1rem; font-weight: 800;
+      margin: 40px 0 12px;
+      color: var(--white);
+    }
+    p, li {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem; color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    a { color: var(--green); text-decoration: underline; }
+    .highlight-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--white); }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="btnDe" onclick="setLang('de')">DE</button>
+    <button class="lang-btn active" id="btnEn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== DEUTSCH ===== -->
+  <div id="content-de" style="display:none;">
+    <h1>Datenschutzerklärung</h1>
+    <p class="last-updated">Stand: Mai 2026</p>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Verantwortlicher im Sinne der DSGVO für diese Website ist:<br><br>
+      Sebastian Ernst<br>
+      c/o Online-Impressum #8088<br>
+      Europaring 90<br>
+      53757 St. Augustin<br>
+      Deutschland<br><br>
+      E-Mail: <a href="mailto:buildonvibes@mail.online-impressum.de">buildonvibes@mail.online-impressum.de</a><br>
+      Kontaktformular: <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Kontaktformular öffnen (→ „Zweiter Kontaktweg" wählen)</a>
+    </p>
+
+    <h2>2. Allgemeines zur Datenverarbeitung</h2>
+    <p>
+      Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur,
+      soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer
+      Inhalte und Leistungen erforderlich ist. Die Verarbeitung personenbezogener
+      Daten erfolgt regelmäßig nur nach Einwilligung des Nutzers. Eine Ausnahme
+      gilt in solchen Fällen, in denen eine vorherige Einholung einer Einwilligung
+      aus tatsächlichen Gründen nicht möglich ist und die Verarbeitung der Daten
+      durch gesetzliche Vorschriften gestattet ist.
+    </p>
+
+    <h2>3. Hosting</h2>
+    <p>
+      Diese Website wird über <strong>Cloudflare Pages</strong> (Cloudflare, Inc.,
+      101 Townsend St, San Francisco, CA 94107, USA) gehostet. Bei jedem Aufruf
+      unserer Internetseite erfasst Cloudflare automatisch technische Daten
+      (IP-Adresse, Datum und Uhrzeit des Abrufs, aufgerufene URL,
+      Browser-Informationen). Diese Daten werden zur Sicherstellung des Betriebs
+      der Website sowie zur Abwehr von Missbrauch verarbeitet.
+    </p>
+    <p>
+      Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert.
+      Weitere Informationen: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>
+    </p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb der Website).</p>
+
+    <h2>4. Schriftarten (Fonts)</h2>
+    <p>
+      Diese Website verwendet Web-Schriftarten, die über den Dienst
+      <strong>Bunny Fonts</strong> (BunnyWay d.o.o., Cesta komandanta Staneta 4a,
+      1215 Medvode, Slowenien) eingebunden werden. Bunny Fonts ist ein
+      datenschutzfreundlicher Anbieter mit Serverstandort in der EU. Es werden
+      keine personenbezogenen Daten (insbesondere keine IP-Adressen) an
+      Dritte außerhalb der EU weitergegeben.
+    </p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher Darstellung).</p>
+
+    <h2>5. Waitlist (E-Mail-Erfassung)</h2>
+    <p>
+      Auf unserer Website bieten wir die Möglichkeit, sich für einen frühen Zugang
+      zur MRRbar Chrome-Extension einzutragen. Dabei erheben wir folgende Daten:
+    </p>
+    <ul>
+      <li>E-Mail-Adresse</li>
+      <li>Zeitpunkt der Eintragung</li>
+      <li>Bestätigung der Einwilligung (Double-Opt-In)</li>
+    </ul>
+    <div class="highlight-box">
+      <p>
+        <strong>Double-Opt-In:</strong> Nach der Eintragung erhalten Sie eine
+        Bestätigungs-E-Mail. Ihre Adresse wird erst dann in unsere Liste
+        aufgenommen, wenn Sie den darin enthaltenen Bestätigungslink anklicken.
+      </p>
+    </div>
+    <p>
+      Die Verarbeitung erfolgt auf Grundlage Ihrer ausdrücklichen Einwilligung
+      gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit
+      widerrufen, indem Sie uns über unser
+      <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Kontaktformular (→ „Zweiter Kontaktweg" wählen)</a>
+      oder den Abmelde-Link in unseren E-Mails kontaktieren. Die Rechtmäßigkeit
+      der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.
+    </p>
+
+    <h2>6. Auftragsverarbeiter: Brevo (E-Mail-Versand)</h2>
+    <p>
+      Für den Versand von E-Mails und die Verwaltung der Waitlist nutzen wir den
+      Dienst <strong>Brevo</strong> (Sendinblue GmbH, Köpenicker Straße 126,
+      10179 Berlin, Deutschland). Brevo ist ein EU-ansässiger Anbieter.
+    </p>
+    <p>
+      Mit Brevo haben wir einen Auftragsverarbeitungsvertrag (AVV) gemäß
+      Art. 28 DSGVO abgeschlossen. Ihre E-Mail-Adresse wird ausschließlich zur
+      Zusendung von Informationen über MRRbar (Early Access, Produktupdates)
+      verwendet und nicht an Dritte weitergegeben oder für Werbezwecke Dritter
+      genutzt.
+    </p>
+    <p>
+      Weitere Informationen: <a href="https://www.brevo.com/de/legal/privacypolicy/" target="_blank" rel="noopener">brevo.com/de/legal/privacypolicy</a>
+    </p>
+
+    <h2>7. Keine Cookies, kein Tracking</h2>
+    <p>
+      Diese Website verwendet keine Cookies und keine Tracking-Technologien
+      (keine Google Analytics, kein Facebook Pixel, keine ähnlichen Dienste).
+      Es werden keine Nutzerprofile erstellt.
+    </p>
+
+    <h2>8. Die MRRbar Chrome-Extension</h2>
+    <p>
+      Die Chrome-Extension selbst verarbeitet ausschließlich Daten lokal auf
+      Ihrem Gerät. API-Schlüssel (Stripe, Lemon Squeezy) werden in
+      <code>chrome.storage.sync</code> gespeichert — verschlüsselt durch Chrome —
+      und verlassen Ihr Gerät nicht. Es werden keine Daten an unsere Server übertragen.
+    </p>
+
+    <h2>9. Ihre Rechte als betroffene Person</h2>
+    <p>Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
+    <ul>
+      <li><strong>Auskunft</strong> (Art. 15 DSGVO)</li>
+      <li><strong>Berichtigung</strong> (Art. 16 DSGVO)</li>
+      <li><strong>Löschung</strong> (Art. 17 DSGVO)</li>
+      <li><strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+      <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+      <li><strong>Widerspruch gegen die Verarbeitung</strong> (Art. 21 DSGVO)</li>
+      <li><strong>Widerruf einer erteilten Einwilligung</strong> (Art. 7 Abs. 3 DSGVO)</li>
+    </ul>
+    <p>
+      Zur Ausübung Ihrer Rechte wenden Sie sich bitte über unser
+      <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Kontaktformular (→ „Zweiter Kontaktweg" wählen)</a>
+      an uns.
+    </p>
+    <p>
+      Darüber hinaus haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde
+      zu beschweren. Die für Deutschland zuständige Behörde ist der
+      Bundesbeauftragte für den Datenschutz und die Informationsfreiheit (BfDI),
+      <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener">www.bfdi.bund.de</a>.
+    </p>
+
+    <h2>10. Datensicherheit</h2>
+    <p>
+      Diese Website nutzt aus Sicherheitsgründen eine SSL/TLS-Verschlüsselung.
+      Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile
+      des Browsers von „http://" auf „https://" wechselt.
+    </p>
+
+    <h2>11. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+    <p>
+      Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Mai 2026.
+      Durch die Weiterentwicklung unserer Website oder aufgrund geänderter
+      gesetzlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung
+      zu ändern. Die jeweils aktuelle Version ist stets unter
+      <a href="/privacy">mrrbar.io/privacy</a> abrufbar.
+    </p>
+  </div>
+
+  <!-- ===== ENGLISH ===== -->
+  <div id="content-en">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: May 2026</p>
+
+    <h2>1. Controller</h2>
+    <p>
+      The controller responsible for data processing on this website within the
+      meaning of the GDPR is:<br><br>
+      Sebastian Ernst<br>
+      c/o Online-Impressum #8088<br>
+      Europaring 90<br>
+      53757 St. Augustin<br>
+      Germany<br><br>
+      Email: <a href="mailto:buildonvibes@mail.online-impressum.de">buildonvibes@mail.online-impressum.de</a><br>
+      Contact form: <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Open contact form (→ select "Zweiter Kontaktweg")</a>
+    </p>
+
+    <h2>2. General information on data processing</h2>
+    <p>
+      We process personal data of our users only to the extent necessary to
+      provide a functional website and our content and services. Personal data
+      is generally processed only with the user's consent. An exception applies
+      where prior consent is not practically obtainable and processing is
+      permitted by law.
+    </p>
+
+    <h2>3. Hosting</h2>
+    <p>
+      This website is hosted via <strong>Cloudflare Pages</strong> (Cloudflare,
+      Inc., 101 Townsend St, San Francisco, CA 94107, USA). Each time our website
+      is accessed, Cloudflare automatically collects technical data (IP address,
+      date and time of access, requested URL, browser information). This data is
+      processed to ensure stable operation of the website and to prevent abuse.
+    </p>
+    <p>
+      Cloudflare is certified under the EU–US Data Privacy Framework.
+      Further information: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>
+    </p>
+    <p>Legal basis: Art. 6(1)(f) GDPR (legitimate interest in the secure operation of the website).</p>
+
+    <h2>4. Web fonts</h2>
+    <p>
+      This website uses web fonts provided by <strong>Bunny Fonts</strong>
+      (BunnyWay d.o.o., Cesta komandanta Staneta 4a, 1215 Medvode, Slovenia).
+      Bunny Fonts is a privacy-friendly provider with servers located in the EU.
+      No personal data (in particular no IP addresses) are transferred to third
+      parties outside the EU.
+    </p>
+    <p>Legal basis: Art. 6(1)(f) GDPR (legitimate interest in consistent visual presentation).</p>
+
+    <h2>5. Waitlist (email collection)</h2>
+    <p>
+      Our website offers the option to sign up for early access to the MRRbar
+      Chrome Extension. We collect the following data:
+    </p>
+    <ul>
+      <li>Email address</li>
+      <li>Time of sign-up</li>
+      <li>Consent confirmation (double opt-in)</li>
+    </ul>
+    <div class="highlight-box">
+      <p>
+        <strong>Double opt-in:</strong> After signing up, you will receive a
+        confirmation email. Your address will only be added to our list once you
+        click the confirmation link contained in that email.
+      </p>
+    </div>
+    <p>
+      Processing is carried out on the basis of your explicit consent pursuant
+      to Art. 6(1)(a) GDPR. You may withdraw your consent at any time by
+      contacting us via our
+      <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">contact form (→ select "Zweiter Kontaktweg")</a>
+      or by using the unsubscribe link in our emails. The lawfulness of
+      processing carried out prior to the withdrawal is not affected.
+    </p>
+
+    <h2>6. Data processor: Brevo (email delivery)</h2>
+    <p>
+      We use <strong>Brevo</strong> (Sendinblue GmbH, Köpenicker Straße 126,
+      10179 Berlin, Germany) for sending emails and managing the waitlist. Brevo
+      is an EU-based provider.
+    </p>
+    <p>
+      We have concluded a data processing agreement (DPA) with Brevo in
+      accordance with Art. 28 GDPR. Your email address is used solely to send
+      information about MRRbar (early access, product updates) and will not be
+      shared with third parties or used for third-party advertising.
+    </p>
+    <p>
+      Further information: <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener">brevo.com/legal/privacypolicy</a>
+    </p>
+
+    <h2>7. No cookies, no tracking</h2>
+    <p>
+      This website does not use cookies or any tracking technologies (no Google
+      Analytics, no Facebook Pixel, no similar services). No user profiles are
+      created.
+    </p>
+
+    <h2>8. The MRRbar Chrome Extension</h2>
+    <p>
+      The Chrome Extension processes data exclusively on your local device.
+      API keys (Stripe, Lemon Squeezy) are stored in
+      <code>chrome.storage.sync</code> — encrypted by Chrome — and never leave
+      your device. No data is transmitted to our servers.
+    </p>
+
+    <h2>9. Your rights as a data subject</h2>
+    <p>You have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Right of access</strong> (Art. 15 GDPR)</li>
+      <li><strong>Right to rectification</strong> (Art. 16 GDPR)</li>
+      <li><strong>Right to erasure</strong> (Art. 17 GDPR)</li>
+      <li><strong>Right to restriction of processing</strong> (Art. 18 GDPR)</li>
+      <li><strong>Right to data portability</strong> (Art. 20 GDPR)</li>
+      <li><strong>Right to object to processing</strong> (Art. 21 GDPR)</li>
+      <li><strong>Right to withdraw consent</strong> (Art. 7(3) GDPR)</li>
+    </ul>
+    <p>
+      To exercise your rights, please contact us via our
+      <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">contact form (→ select "Zweiter Kontaktweg")</a>.
+    </p>
+    <p>
+      You also have the right to lodge a complaint with a data protection
+      supervisory authority. The authority competent for Germany is the Federal
+      Commissioner for Data Protection and Freedom of Information (BfDI),
+      <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener">www.bfdi.bund.de</a>.
+    </p>
+
+    <h2>10. Data security</h2>
+    <p>
+      This website uses SSL/TLS encryption for security purposes. You can
+      recognise an encrypted connection by the browser address bar changing from
+      "http://" to "https://".
+    </p>
+
+    <h2>11. Updates to this privacy policy</h2>
+    <p>
+      This privacy policy is currently valid as of May 2026. As our website
+      evolves or legal requirements change, it may be necessary to update this
+      policy. The current version is always available at
+      <a href="/privacy">mrrbar.io/privacy</a>.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="/" class="logo" style="text-decoration:none;">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="footer-links">
+    <a href="/imprint">Impressum</a>
+    <a href="/privacy">Datenschutz / Privacy</a>
+    <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Kontakt / Contact</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.getElementById('content-de').style.display = lang === 'de' ? '' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
+    document.getElementById('btnDe').classList.toggle('active', lang === 'de');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+</script>
+
+</body>
+</html>

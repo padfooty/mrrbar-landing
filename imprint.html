@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impressum / Legal Notice – MRRbar</title>
+  <!-- Fonts via fonts.bunny.net – DSGVO-konform, kein IP-Transfer an Google -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,600|cabinet-grotesk:400,700,800,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #1a1a2e;
+      --card:   #22224a;
+      --border: rgba(255,255,255,0.07);
+      --green:  #00ff88;
+      --white:  #f0f0ff;
+      --muted:  #7070a0;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(26,26,46,0.85);
+    }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      color: var(--green);
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .logo-dollar {
+      width: 28px; height: 28px;
+      background: var(--green); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 0.9rem; font-weight: 700;
+    }
+    /* LANGUAGE TOGGLE */
+    .lang-toggle {
+      display: flex; gap: 4px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 4px;
+    }
+    .lang-btn {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      font-weight: 600; letter-spacing: 0.04em;
+      padding: 5px 14px; border-radius: 5px; border: none;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+      background: transparent; color: var(--muted);
+    }
+    .lang-btn.active {
+      background: var(--green); color: var(--bg);
+    }
+    main {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 24px 80px;
+    }
+    h1 {
+      font-size: 2rem; font-weight: 900;
+      letter-spacing: -0.035em;
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 1.1rem; font-weight: 800;
+      margin: 36px 0 12px;
+      color: var(--white);
+    }
+    p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem; color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    a { color: var(--green); text-decoration: underline; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--white); }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="btnDe" onclick="setLang('de')">DE</button>
+    <button class="lang-btn active" id="btnEn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== DEUTSCH ===== -->
+  <div id="content-de" style="display:none;">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>
+      Sebastian Ernst<br>
+      c/o Online-Impressum #8088<br>
+      Europaring 90<br>
+      53757 St. Augustin<br>
+      Deutschland
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: <a href="mailto:buildonvibes@mail.online-impressum.de">buildonvibes@mail.online-impressum.de</a><br>
+      Kontaktformular: <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Kontaktformular öffnen (→ „Zweiter Kontaktweg" wählen)</a>
+    </p>
+
+    <h2>Zuständige Regulierungs- und Aufsichtsbehörde</h2>
+    <p>
+      Bayerische Landeszentrale für neue Medien<br>
+      Sitz: Deutschland
+    </p>
+
+    <h2>Hinweis zur Online-Streitbeilegung</h2>
+    <p>
+      Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
+      (OS) bereit:
+      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a><br>
+      Wir sind nicht verpflichtet und nicht bereit, an einem
+      Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+      teilzunehmen.
+    </p>
+
+    <h2>Urheberrecht</h2>
+    <p>
+      Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
+      unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche
+      gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+      der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+      schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+    </p>
+  </div>
+
+  <!-- ===== ENGLISH ===== -->
+  <div id="content-en">
+    <h1>Legal Notice</h1>
+
+    <h2>Information pursuant to § 5 TMG (German Telemedia Act)</h2>
+    <p>
+      Sebastian Ernst<br>
+      c/o Online-Impressum #8088<br>
+      Europaring 90<br>
+      53757 St. Augustin<br>
+      Germany
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Email: <a href="mailto:buildonvibes@mail.online-impressum.de">buildonvibes@mail.online-impressum.de</a><br>
+      Contact form: <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg" target="_blank" rel="noopener">Open contact form (→ select "Zweiter Kontaktweg")</a>
+    </p>
+
+    <h2>Responsible regulatory authority</h2>
+    <p>
+      Bayerische Landeszentrale für neue Medien (Bavarian State Authority for New Media)<br>
+      Registered: Germany
+    </p>
+
+    <h2>EU Online Dispute Resolution</h2>
+    <p>
+      The European Commission provides a platform for online dispute resolution
+      (ODR):
+      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a><br>
+      We are neither obliged nor willing to participate in dispute resolution
+      proceedings before a consumer arbitration board.
+    </p>
+
+    <h2>Copyright</h2>
+    <p>
+      The content and works created by the site operators on these pages are
+      subject to German copyright law. Contributions by third parties are
+      identified as such. Reproduction, editing, distribution, and any form of
+      exploitation beyond the limits of copyright law require the written consent
+      of the respective author or creator.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="/" class="logo" style="text-decoration:none;">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="footer-links">
+    <a href="/imprint">Impressum</a>
+    <a href="/privacy">Datenschutz / Privacy</a>
+    <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Kontakt / Contact</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.getElementById('content-de').style.display = lang === 'de' ? '' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? '' : 'none';
+    document.getElementById('btnDe').classList.toggle('active', lang === 'de');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MRRbar – Your Revenue. Always Visible.</title>
+  <!-- Fonts via fonts.bunny.net – DSGVO-konform, kein IP-Transfer an Google -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,600|cabinet-grotesk:400,700,800,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #1a1a2e;
+      --card:      #22224a;
+      --card-lite: #2a2a58;
+      --border:    rgba(255,255,255,0.07);
+      --green:     #00ff88;
+      --green-dim: rgba(0,255,136,0.12);
+      --green-glow:rgba(0,255,136,0.25);
+      --amber:     #ffaa00;
+      --red:       #ff6b6b;
+      --purple:    #a78bfa;
+      --white:     #f0f0ff;
+      --muted:     #7070a0;
+      --radius:    10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(26,26,46,0.75);
+    }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      color: var(--green); letter-spacing: -0.03em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-dollar {
+      width: 28px; height: 28px; background: var(--green);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 0.9rem; font-weight: 700;
+    }
+    .nav-pill {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 999px; letter-spacing: 0.04em;
+    }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 140px 24px 80px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 48px 48px; pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(0,255,136,0.2); padding: 6px 18px;
+      border-radius: 999px; margin-bottom: 32px; display: inline-block;
+      animation: fadeUp 0.5s ease both;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.8rem); font-weight: 900;
+      line-height: 1.0; letter-spacing: -0.04em; max-width: 800px;
+      margin-bottom: 24px; animation: fadeUp 0.6s ease 0.1s both;
+    }
+    h1 .accent { color: var(--green); text-shadow: 0 0 40px rgba(0,255,136,0.3); }
+    .hero-sub {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem;
+      color: var(--muted); max-width: 520px; line-height: 1.7;
+      margin-bottom: 52px; animation: fadeUp 0.6s ease 0.2s both;
+    }
+    /* TOOLBAR MOCK */
+    .toolbar-section {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 14px; margin-bottom: 56px;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .toolbar-eyebrow {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    }
+    .chrome-toolbar {
+      display: flex; align-items: center; gap: 8px;
+      background: #2d2d2d; border-radius: 10px; padding: 10px 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .chrome-ext-plain {
+      width: 22px; height: 22px; border-radius: 4px;
+      opacity: 0.35; flex-shrink: 0;
+    }
+    .chrome-ext-mrrbar {
+      position: relative; display: inline-flex;
+      width: 28px; height: 28px; border-radius: 4px;
+      background: #1a1a2e; border: 1px solid rgba(0,255,136,0.25);
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .mrrbar-icon-text {
+      font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+      font-weight: 700; color: #00ff88; line-height: 1;
+    }
+    /* ANIMATED BADGE */
+    .mrrbar-badge-wrap {
+      position: absolute; bottom: -5px; right: -12px; z-index: 10;
+    }
+    .badge-state {
+      position: absolute; bottom: 0; right: 0;
+      background: #1a1a2e; border: 1px solid rgba(0,255,136,0.5);
+      border-radius: 3px; padding: 1px 4px; font-size: 9px;
+      color: #00ff88; font-family: monospace; font-weight: 700;
+      white-space: nowrap; line-height: 1.2;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .badge-state.active { opacity: 1; }
+    /* MODE LABEL */
+    .toolbar-mode-label {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+      color: var(--muted); min-height: 18px;
+    }
+    .mode-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+      animation: blink 2s ease infinite;
+    }
+    .mode-text-wrap { position: relative; min-width: 180px; height: 18px; }
+    .mode-text {
+      position: absolute; left: 0; top: 0;
+      opacity: 0; transition: opacity 0.4s ease; white-space: nowrap;
+    }
+    .mode-text.active { opacity: 1; }
+    .toolbar-caption {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted);
+    }
+    /* POPUP MOCK */
+    .popup-mock {
+      width: 320px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; margin: 0 auto 56px;
+      box-shadow:
+        0 0 0 1px rgba(0,255,136,0.08),
+        0 0 60px rgba(0,255,136,0.06),
+        0 32px 64px rgba(0,0,0,0.6);
+      animation: fadeUp 0.7s ease 0.25s both; text-align: left;
+    }
+    .popup-header {
+      padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .popup-title {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+      font-weight: 600; color: var(--green); display: flex; align-items: center; gap: 8px;
+    }
+    .popup-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 8px var(--green); animation: blink 2s ease infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .popup-gear { color: var(--muted); font-size: 0.9rem; cursor: pointer; }
+    .popup-body { padding: 14px 16px; }
+    .metric-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .metric-card {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px;
+    }
+    .m-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 4px;
+    }
+    .m-value { font-size: 1.35rem; font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1; }
+    .m-delta { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; margin-top: 4px; }
+    .m-delta.pos { color: var(--green); }
+    .m-delta.neg { color: var(--red); }
+    .m-pills { display: flex; gap: 4px; margin-top: 6px; }
+    .pill {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem;
+      padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted);
+    }
+    .pill.stripe { border-color: rgba(100,180,255,0.3); color: #64b4ff; }
+    .pill.ls     { border-color: rgba(255,210,100,0.3); color: #ffd264; }
+    .metric-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .metric-card-sm {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 10px 12px;
+    }
+    .m-value-sm { font-size: 1rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+    .m-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: var(--muted); margin-top: 2px; }
+    .sources-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0 4px; border-top: 1px solid var(--border); margin-top: 4px;
+    }
+    .sources-pills { display: flex; gap: 6px; }
+    .source-pill { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; padding: 3px 10px; border-radius: 999px; }
+    .source-pill.stripe { background: rgba(100,180,255,0.1); border: 1px solid rgba(100,180,255,0.25); color: #64b4ff; }
+    .source-pill.ls     { background: rgba(255,210,100,0.1); border: 1px solid rgba(255,210,100,0.25); color: #ffd264; }
+    .last-update { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--muted); }
+    .shelf { display: flex; gap: 5px; flex-wrap: wrap; padding: 10px 16px 14px; border-top: 1px solid var(--border); }
+    .ach {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); filter: grayscale(1) opacity(0.3); transition: all 0.3s;
+    }
+    .ach.unlocked {
+      filter: none; box-shadow: 0 0 8px var(--green);
+      border-color: rgba(0,255,136,0.4); animation: pulse-glow 2s ease infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 6px var(--green); }
+      50%       { box-shadow: 0 0 16px var(--green); }
+    }
+    /* FORM */
+    .form-wrap { width: 100%; max-width: 460px; animation: fadeUp 0.7s ease 0.35s both; }
+    .form-inner { display: flex; gap: 8px; margin-bottom: 10px; }
+    input[type="email"] {
+      flex: 1; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 16px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
+      color: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="email"]::placeholder { color: var(--muted); }
+    input[type="email"]:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-dim); }
+    .btn-cta {
+      background: var(--green); color: var(--bg); border: none;
+      border-radius: var(--radius); padding: 13px 22px;
+      font-family: 'Cabinet Grotesk', sans-serif; font-size: 0.88rem; font-weight: 800;
+      cursor: pointer; white-space: nowrap; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--green-glow); }
+    .form-gdpr {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 8px; text-align: left;
+    }
+    .form-gdpr input[type="checkbox"] { margin-top: 2px; accent-color: var(--green); flex-shrink: 0; }
+    .form-gdpr a { color: var(--green); text-decoration: underline; }
+    .success-msg {
+      display: none; background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.25);
+      border-radius: var(--radius); padding: 13px 16px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--green); text-align: center;
+    }
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
+    .section-tag {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      text-transform: uppercase; letter-spacing: 0.16em; color: var(--green); margin-bottom: 14px;
+    }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 40px; }
+    .problem { padding: 80px 24px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .problem h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 20px; }
+    .problem p { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; color: var(--muted); line-height: 1.75; max-width: 560px; margin: 0 auto; }
+    .how { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .step { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; }
+    .step-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.12em; margin-bottom: 12px; }
+    .step h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .step p { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+    .features { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 40px; }
+    .feat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+    .feat:hover { border-color: rgba(0,255,136,0.2); transform: translateY(-2px); }
+    .feat-icon { font-size: 1.6rem; margin-bottom: 14px; display: block; }
+    .feat h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 8px; }
+    .feat p { font-family: 'IBM Plex Mono', monospace; font-size: 0.77rem; color: var(--muted); line-height: 1.6; }
+    .achievements { padding: 80px 24px; max-width: 760px; margin: 0 auto; text-align: center; }
+    .ach-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 40px; }
+    .ach-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 10px; transition: border-color 0.2s; }
+    .ach-item:hover { border-color: rgba(0,255,136,0.25); }
+    .ach-emoji { font-size: 1.4rem; }
+    .ach-info .ach-name { font-size: 0.82rem; font-weight: 700; margin-bottom: 2px; }
+    .ach-info .ach-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--muted); }
+    .security { padding: 80px 24px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .sec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 40px; }
+    .sec-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .sec-item .s-icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
+    .sec-item h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; }
+    .sec-item p { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
+    .cta-bottom { padding: 100px 24px; text-align: center; max-width: 600px; margin: 0 auto; }
+    .cta-bottom h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px; }
+    .cta-bottom p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--muted); margin-bottom: 40px; }
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .form-inner { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .divider { margin: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </div>
+  <div class="nav-pill">Chrome Extension · Free Early Access</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Stripe + Lemon Squeezy · Free Chrome Extension</div>
+  <h1>Your Revenue.<br><span class="accent">Always visible.</span></h1>
+  <p class="hero-sub">
+    Checking your dashboard 40× a day?<br>
+    MRRbar shows MRR, today's revenue &amp; new sales<br>right in your browser toolbar — in real time.
+  </p>
+
+  <!-- TOOLBAR MOCK -->
+  <div class="toolbar-section">
+    <p class="toolbar-eyebrow">Always visible in your Chrome toolbar</p>
+    <div class="chrome-toolbar">
+      <div class="chrome-ext-plain" style="background:#5865f2;"></div>
+      <div class="chrome-ext-plain" style="background:#e05252;"></div>
+      <div class="chrome-ext-plain" style="background:#3a3a4a;"></div>
+      <div class="chrome-ext-mrrbar">
+        <span class="mrrbar-icon-text">$</span>
+        <div class="mrrbar-badge-wrap">
+          <div class="badge-state active" id="badgeMrr">$2.8k</div>
+          <div class="badge-state" id="badgeToday">$340</div>
+        </div>
+      </div>
+      <div class="chrome-ext-plain" style="background:#3a3a4a;"></div>
+    </div>
+    <div class="toolbar-mode-label">
+      <div class="mode-dot"></div>
+      <div class="mode-text-wrap">
+        <span class="mode-text active" id="labelMrr">Showing MRR</span>
+        <span class="mode-text" id="labelToday">Showing today's revenue</span>
+      </div>
+    </div>
+    <p class="toolbar-caption">No tab switching. Your revenue is just… there.</p>
+  </div>
+
+  <!-- POPUP MOCK -->
+  <div class="popup-mock">
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="popup-dot"></div>
+        MRRbar
+      </div>
+      <span class="popup-gear">⚙</span>
+    </div>
+    <div class="popup-body">
+      <div class="metric-grid-2">
+        <div class="metric-card">
+          <div class="m-label">Today's Revenue</div>
+          <div class="m-value">$340</div>
+          <div class="m-delta pos">↑ +18% vs yesterday</div>
+          <div class="m-pills">
+            <span class="pill stripe">S $220</span>
+            <span class="pill ls">LS $120</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">MRR</div>
+          <div class="m-value">$2.8k</div>
+          <div class="m-delta pos">↑ +4.2% MoM</div>
+          <div class="m-pills">
+            <span class="pill stripe">S $1.9k</span>
+            <span class="pill ls">LS $0.9k</span>
+          </div>
+        </div>
+      </div>
+      <div class="metric-grid-3">
+        <div class="metric-card-sm">
+          <div class="m-label">New Subs</div>
+          <div class="m-value-sm">3</div>
+          <div class="m-pills" style="margin-top:4px;">
+            <span class="pill stripe" style="font-size:0.5rem;">S 2</span>
+            <span class="pill ls" style="font-size:0.5rem;">LS 1</span>
+          </div>
+        </div>
+        <div class="metric-card-sm">
+          <div class="m-label">Active Subs</div>
+          <div class="m-value-sm">38</div>
+          <div class="m-sub">~2.1% churn</div>
+        </div>
+        <div class="metric-card-sm">
+          <div class="m-label">ARR</div>
+          <div class="m-value-sm">$33.6k</div>
+        </div>
+      </div>
+      <div class="sources-row">
+        <div class="sources-pills">
+          <span class="source-pill stripe">Stripe ✓</span>
+          <span class="source-pill ls">Lemon Squeezy ✓</span>
+        </div>
+        <span class="last-update">2 min ago · ↻</span>
+      </div>
+    </div>
+    <div class="shelf">
+      <div class="ach unlocked">💰</div>
+      <div class="ach unlocked">🔥</div>
+      <div class="ach unlocked">🎉</div>
+      <div class="ach unlocked">🌱</div>
+      <div class="ach unlocked">📅</div>
+      <div class="ach">⚡</div>
+      <div class="ach">👥</div>
+      <div class="ach">💯</div>
+      <div class="ach">🎯</div>
+      <div class="ach">🚀</div>
+      <div class="ach">👑</div>
+      <div class="ach">🗓️</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+    <div class="form-inner" id="formInner1">
+      <input type="email" id="emailInput" placeholder="your@email.com" />
+      <button class="btn-cta" onclick="handleSubmit('emailInput','gdpr','successMsg','formInner1','formGdpr1')">Get Early Access →</button>
+    </div>
+    <div class="form-gdpr" id="formGdpr1">
+      <input type="checkbox" id="gdpr" />
+      <label for="gdpr">
+        I agree to the <a href="/privacy">Privacy Policy</a> and consent to the processing of my email address. A double opt-in confirmation will follow by email.
+      </label>
+    </div>
+    <div class="success-msg" id="successMsg">
+      ✓ You're in! Check your inbox — confirmation email on its way.
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<hr class="divider"/>
+<section class="problem">
+  <div class="section-tag">The Problem</div>
+  <h2>Open dashboard. Check numbers.<br>Close tab. Repeat.</h2>
+  <p>
+    As an indie founder you check your revenue dashboard up to 40× a day.
+    It kills your flow. MRRbar fixes that —
+    the number is always visible, right in your toolbar.
+  </p>
+</section>
+
+<!-- HOW IT WORKS -->
+<hr class="divider"/>
+<section class="how">
+  <div class="section-tag" style="text-align:center;">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01 — INSTALL</div>
+      <h3>Install the extension</h3>
+      <p>Grab MRRbar from the Chrome Web Store. Takes under 60 seconds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02 — CONNECT</div>
+      <h3>Add your API key</h3>
+      <p>Paste your Stripe read-only key and/or Lemon Squeezy key. Keys stay local on your device — always.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03 — DONE</div>
+      <h3>Revenue in your toolbar</h3>
+      <p>Your MRR or today's revenue appears instantly in the browser badge. Auto-refreshes every 5 min.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<hr class="divider"/>
+<section class="features">
+  <div class="section-tag" style="text-align:center;">Features</div>
+  <div class="feat-grid">
+    <div class="feat">
+      <span class="feat-icon">📊</span>
+      <h3>Stripe + Lemon Squeezy</h3>
+      <p>Both sources at once. Combined totals with S / LS breakdown pills beneath each metric.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">⚡</span>
+      <h3>Live Badge</h3>
+      <p>MRR or today's revenue right in your toolbar badge. Always visible, no tab switching needed.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📈</span>
+      <h3>Revenue Pace</h3>
+      <p>How's today tracking vs. yesterday? Revenue pace tells you if you're on course — in real time.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔔</span>
+      <h3>Sale Notifications</h3>
+      <p>Optional browser notification on every new sale. Know the moment someone buys.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔥</span>
+      <h3>Revenue Streak</h3>
+      <p>How many consecutive days have you made at least $1? Track your momentum daily.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🎯</span>
+      <h3>12 Achievements</h3>
+      <p>From "First Drop" to "Full-Time Founder". Unlock milestones and share them on 𝕏.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<hr class="divider"/>
+<section class="achievements">
+  <div class="section-tag">Achievement System</div>
+  <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
+    Celebrate every milestone.
+  </h2>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--muted);margin-bottom:0;">
+    12 achievements. Unlocked automatically, shareable on 𝕏.
+  </p>
+  <div class="ach-grid">
+    <div class="ach-item"><span class="ach-emoji">💰</span><div class="ach-info"><div class="ach-name">First Drop</div><div class="ach-desc">First payment ever</div></div></div>
+    <div class="ach-item"><span class="ach-emoji">🌱</span><div class="ach-info"><div class="ach-name">Ramen Mode</div><div class="ach-desc">$100 MRR</div></div></div>
+    <div class="ach-item"><span class="ach-emoji">🎯</span><div class="ach-info"><div class="ach-name">Four Figure Club</div><div class="ach-desc">$1,000 MRR</div></div></div>
+    <div class="ach-item"><span class="ach-emoji">🚀</span><div class="ach-info"><div class="ach-name">Escape Velocity</div><div class="ach-desc">$5,000 MRR</div></div></div>
+    <div class="ach-item"><span class="ach-emoji">👑</span><div class="ach-info"><div class="ach-name">Full-Time Founder</div><div class="ach-desc">$10,000 MRR</div></div></div>
+    <div class="ach-item"><span class="ach-emoji">📅</span><div class="ach-info"><div class="ach-name">Week Warrior</div><div class="ach-desc">7-day streak</div></div></div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<hr class="divider"/>
+<section class="security">
+  <div class="section-tag">Security &amp; Privacy</div>
+  <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
+    Your keys. Your device.
+  </h2>
+  <div class="sec-grid">
+    <div class="sec-item"><span class="s-icon">🔐</span><h4>Stored locally</h4><p>API keys are only stored in chrome.storage.sync — encrypted by Chrome, never on external servers.</p></div>
+    <div class="sec-item"><span class="s-icon">👁️</span><h4>Read-only</h4><p>Stripe restricted key with charges:read + subscriptions:read only. Lemon Squeezy read-only scope.</p></div>
+    <div class="sec-item"><span class="s-icon">🚫</span><h4>No CDN</h4><p>No external scripts, no tracking, no CDN. Fully self-contained extension.</p></div>
+    <div class="sec-item"><span class="s-icon">🇪🇺</span><h4>GDPR-friendly</h4><p>No data leaves your browser. The extension talks directly to Stripe / Lemon Squeezy APIs only.</p></div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<hr class="divider"/>
+<section class="cta-bottom">
+  <div class="section-tag">Join the waitlist</div>
+  <h2>Stop refreshing<br>your <span style="color:var(--green);">dashboard.</span></h2>
+  <p>Free early access · no spam · unsubscribe anytime</p>
+  <div class="form-wrap" style="max-width:420px;margin:0 auto;">
+    <div class="form-inner" id="formInner2">
+      <input type="email" id="emailInput2" placeholder="your@email.com" />
+      <button class="btn-cta" onclick="handleSubmit('emailInput2','gdpr2','successMsg2','formInner2','formGdpr2')">Get Early Access →</button>
+    </div>
+    <div class="form-gdpr" id="formGdpr2">
+      <input type="checkbox" id="gdpr2" />
+      <label for="gdpr2">
+        I agree to the <a href="/privacy">Privacy Policy</a> and consent to receiving emails. A double opt-in confirmation will follow.
+      </label>
+    </div>
+    <div class="success-msg" id="successMsg2">✓ You're in! Check your inbox.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </div>
+  <div class="footer-links">
+    <a href="/imprint">Imprint</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Contact</a>
+  </div>
+</footer>
+
+<script>
+  /* BADGE TOGGLE ANIMATION */
+  (function() {
+    const badgeMrr   = document.getElementById('badgeMrr');
+    const badgeToday = document.getElementById('badgeToday');
+    const labelMrr   = document.getElementById('labelMrr');
+    const labelToday = document.getElementById('labelToday');
+    let showingMrr = true;
+
+    function toggle() {
+      showingMrr = !showingMrr;
+      badgeMrr.classList.toggle('active', showingMrr);
+      badgeToday.classList.toggle('active', !showingMrr);
+      labelMrr.classList.toggle('active', showingMrr);
+      labelToday.classList.toggle('active', !showingMrr);
+    }
+
+    setInterval(toggle, 2500);
+  })();
+
+  /* BREVO FORM */
+  const BREVO_API_KEY = 'YOUR_BREVO_API_KEY';
+  const BREVO_LIST_ID = 0;
+
+  async function submitToBrevo(email) {
+    const res = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'api-key': BREVO_API_KEY
+      },
+      body: JSON.stringify({ email, listIds: [BREVO_LIST_ID], updateEnabled: true })
+    });
+    if (!res.ok && res.status !== 204) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || 'Brevo error');
+    }
+  }
+
+  async function handleSubmit(emailId, gdprId, successId, formInnerId, gdprWrapperId) {
+    const emailEl = document.getElementById(emailId);
+    const gdprEl  = document.getElementById(gdprId);
+    const email   = emailEl.value.trim();
+
+    if (!email || !email.includes('@')) {
+      emailEl.style.borderColor = 'var(--red)';
+      setTimeout(() => emailEl.style.borderColor = '', 1500);
+      return;
+    }
+    if (!gdprEl.checked) {
+      gdprEl.style.outline = '2px solid var(--red)';
+      setTimeout(() => gdprEl.style.outline = '', 1500);
+      return;
+    }
+
+    const formInner = document.getElementById(formInnerId);
+    const gdprWrap  = gdprWrapperId ? document.getElementById(gdprWrapperId) : null;
+    if (formInner) formInner.style.display = 'none';
+    if (gdprWrap)  gdprWrap.style.display  = 'none';
+
+    try {
+      await submitToBrevo(email);
+      document.getElementById(successId).style.display = 'block';
+    } catch (e) {
+      if (formInner) formInner.style.display = '';
+      if (gdprWrap)  gdprWrap.style.display  = '';
+      emailEl.style.borderColor = 'var(--red)';
+      emailEl.placeholder = 'Something went wrong — try again';
+      setTimeout(() => {
+        emailEl.style.borderColor = '';
+        emailEl.placeholder = 'your@email.com';
+      }, 2500);
+    }
+  }
+</script>
+</body>
+</html>
