@@ -629,19 +629,12 @@
     setInterval(toggle, 2500);
   })();
 
-  /* BREVO FORM */
-  const BREVO_API_KEY = 'YOUR_BREVO_API_KEY';
-  const BREVO_LIST_ID = 0;
-
+  /* BREVO FORM — submits via Cloudflare Worker, API key stays server-side */
   async function submitToBrevo(email) {
-    const res = await fetch('https://api.brevo.com/v3/contacts', {
+    const res = await fetch('https://mrrbar-brevo.padkon.workers.dev', {
       method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'api-key': BREVO_API_KEY
-      },
-      body: JSON.stringify({ email, listIds: [BREVO_LIST_ID], updateEnabled: true })
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email })
     });
     if (!res.ok && res.status !== 204) {
       const err = await res.json().catch(() => ({}));
