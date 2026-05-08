@@ -42,14 +42,19 @@ export default {
       });
     }
 
-    const res = await fetch('https://api.brevo.com/v3/contacts', {
+    const res = await fetch('https://api.brevo.com/v3/contacts/doubleOptinConfirmation', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
         'content-type': 'application/json',
         'api-key': env.BREVO_API_KEY,
       },
-      body: JSON.stringify({ email, listIds: [BREVO_LIST_ID], updateEnabled: true }),
+      body: JSON.stringify({
+        email,
+        includeListIds: [BREVO_LIST_ID],
+        templateId: 3,
+        redirectionUrl: 'https://mrr.bar',
+      }),
     });
 
     if (!res.ok) {
