@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You're on the list – MRRbar</title>
+  <!-- Fonts via fonts.bunny.net – DSGVO-konform, kein IP-Transfer an Google -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,600|cabinet-grotesk:400,700,800,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #1a1a2e;
+      --card:       #22224a;
+      --border:     rgba(255,255,255,0.07);
+      --green:      #00ff88;
+      --green-dim:  rgba(0,255,136,0.12);
+      --green-glow: rgba(0,255,136,0.25);
+      --white:      #f0f0ff;
+      --muted:      #7070a0;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(26,26,46,0.85);
+    }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      color: var(--green);
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .logo-dollar {
+      width: 28px; height: 28px;
+      background: var(--green); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 0.9rem; font-weight: 700;
+    }
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative; z-index: 1;
+    }
+    main::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 48px 48px; pointer-events: none;
+    }
+    main::after {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
+    main > * { position: relative; z-index: 1; }
+    .check-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--green-dim); border: 2px solid rgba(0,255,136,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 32px;
+      font-size: 2rem;
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+      box-shadow: 0 0 40px var(--green-glow);
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(0,255,136,0.2); padding: 6px 18px;
+      border-radius: 999px; margin-bottom: 28px; display: inline-block;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900;
+      line-height: 1.05; letter-spacing: -0.04em;
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+    h1 .accent { color: var(--green); text-shadow: 0 0 40px rgba(0,255,136,0.3); }
+    .sub {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem;
+      color: var(--muted); max-width: 480px; line-height: 1.75;
+      margin-bottom: 48px;
+      animation: fadeUp 0.5s ease 0.3s both;
+    }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: var(--bg); border: none;
+      border-radius: 10px; padding: 13px 28px;
+      font-family: 'Cabinet Grotesk', sans-serif; font-size: 0.92rem; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      animation: fadeUp 0.5s ease 0.4s both;
+    }
+    .btn-back:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--green-glow); }
+    .gdpr-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      color: var(--muted); max-width: 420px; line-height: 1.7;
+      margin-top: 28px; text-align: center;
+      animation: fadeUp 0.5s ease 0.5s both;
+    }
+    .gdpr-note a { color: var(--muted); text-decoration: underline; }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+</nav>
+
+<main>
+  <div class="check-icon">✓</div>
+  <div class="eyebrow">Email confirmed</div>
+  <h1>You're on the <span class="accent">list.</span></h1>
+  <p class="sub">
+    We'll reach out as soon as MRRbar is ready for early access.<br>
+    In the meantime — keep shipping.
+  </p>
+  <a href="/" class="btn-back">Back to MRRbar →</a>
+  <p class="gdpr-note">
+    You've consented to receive MRRbar product updates and early-access information.<br>
+    You can withdraw your consent at any time via the unsubscribe link in any email,
+    via our <a href="/privacy">Privacy Policy</a>,
+    or by <a href="/unsubscribe">unsubscribing here</a>.
+  </p>
+</main>
+
+<footer>
+  <a href="/" class="logo" style="text-decoration:none;">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="footer-links">
+    <a href="/imprint">Imprint</a>
+    <a href="/privacy">Privacy</a>
+    <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

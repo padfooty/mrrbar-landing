@@ -53,7 +53,7 @@ export default {
         email,
         includeListIds: [BREVO_LIST_ID],
         templateId: 3,
-        redirectionUrl: 'https://mrr.bar',
+        redirectionUrl: 'https://mrr.bar/confirmed',
       }),
     });
 
