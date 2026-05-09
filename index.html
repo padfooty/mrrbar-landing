@@ -279,7 +279,7 @@
     }
     .divider { border: none; border-top: 1px solid var(--border); margin: 0 40px; }
     .problem { padding: 80px 24px; max-width: 860px; margin: 0 auto; text-align: center; }
-    .problem h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 20px; }
+    .problem h2 { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 900; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 20px; }
     .problem p { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; color: var(--muted); line-height: 1.75; max-width: 560px; margin: 0 auto; }
     .how { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
@@ -302,13 +302,13 @@
     .ach-info .ach-name { font-size: 0.82rem; font-weight: 700; margin-bottom: 2px; }
     .ach-info .ach-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--muted); }
     .security { padding: 80px 24px; max-width: 860px; margin: 0 auto; text-align: center; }
-    .sec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 40px; }
+    .sec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 40px; }
     .sec-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
     .sec-item .s-icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
     .sec-item h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; }
     .sec-item p { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
     .cta-bottom { padding: 100px 24px; text-align: center; max-width: 600px; margin: 0 auto; }
-    .cta-bottom h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px; }
+    .cta-bottom h2 { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px; }
     .cta-bottom p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--muted); margin-bottom: 40px; }
     footer {
       border-top: 1px solid var(--border); padding: 28px 40px;
@@ -338,12 +338,11 @@
     <div class="logo-dollar">$</div>
     MRRbar
   </div>
-  <div class="nav-pill">Chrome Extension · Free Early Access</div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="eyebrow">Stripe + Lemon Squeezy · Free Chrome Extension</div>
+  <div class="eyebrow">Stripe + Lemon Squeezy · Chrome Extension</div>
   <h1>Your Revenue.<br><span class="accent">Always visible.</span></h1>
   <p class="hero-sub">
     Checking your dashboard 40× a day?<br>
@@ -458,7 +457,7 @@
     <div class="form-gdpr" id="formGdpr1">
       <input type="checkbox" id="gdpr" />
       <label for="gdpr">
-        I agree to the <a href="/privacy">Privacy Policy</a> and consent to the processing of my email address. A double opt-in confirmation will follow by email.
+        I agree to the <a href="/privacy">Privacy Policy</a> and consent to my email being processed to receive MRRbar product updates and early-access information. Confirmation is via double opt-in. I can withdraw my consent at any time.
       </label>
     </div>
     <div class="success-msg" id="successMsg">
@@ -544,7 +543,7 @@
 <hr class="divider"/>
 <section class="achievements">
   <div class="section-tag">Achievement System</div>
-  <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
+  <h2 style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
     Celebrate every milestone.
   </h2>
   <p style="font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--muted);margin-bottom:0;">
@@ -564,7 +563,7 @@
 <hr class="divider"/>
 <section class="security">
   <div class="section-tag">Security &amp; Privacy</div>
-  <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
+  <h2 style="font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px;">
     Your keys. Your device.
   </h2>
   <div class="sec-grid">
@@ -589,7 +588,7 @@
     <div class="form-gdpr" id="formGdpr2">
       <input type="checkbox" id="gdpr2" />
       <label for="gdpr2">
-        I agree to the <a href="/privacy">Privacy Policy</a> and consent to receiving emails. A double opt-in confirmation will follow.
+        I agree to the <a href="/privacy">Privacy Policy</a> and consent to my email being processed to receive MRRbar product updates and early-access information. Confirmation is via double opt-in. I can withdraw my consent at any time.
       </label>
     </div>
     <div class="success-msg" id="successMsg2">✓ You're in! Check your inbox.</div>
@@ -604,7 +603,7 @@
   </div>
   <div class="footer-links">
     <a href="/imprint">Imprint</a>
-    <a href="/privacy">Privacy Policy</a>
+    <a href="/privacy">Privacy</a>
     <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Contact</a>
   </div>
 </footer>
@@ -629,16 +628,16 @@
     setInterval(toggle, 2500);
   })();
 
-  /* BREVO FORM — submits via Cloudflare Worker, API key stays server-side */
+  /* BREVO FORM — submits to Cloudflare Worker (mrrbar-brevo), API key stays server-side */
   async function submitToBrevo(email) {
-    const res = await fetch('https://mrrbar-brevo.padkon.workers.dev', {
+    const res = await fetch('https://mrrbar-brevo.padkon.workers.dev/api/subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email }),
     });
     if (!res.ok && res.status !== 204) {
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || 'Brevo error');
+      throw new Error(err.error || 'Subscription error');
     }
   }
 

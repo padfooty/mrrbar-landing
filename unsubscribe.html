@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unsubscribe – MRRbar</title>
+  <!-- Fonts via fonts.bunny.net – DSGVO-konform, kein IP-Transfer an Google -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,600|cabinet-grotesk:400,700,800,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #1a1a2e;
+      --card:       #22224a;
+      --border:     rgba(255,255,255,0.07);
+      --green:      #00ff88;
+      --green-dim:  rgba(0,255,136,0.12);
+      --green-glow: rgba(0,255,136,0.25);
+      --red:        #ff6b6b;
+      --white:      #f0f0ff;
+      --muted:      #7070a0;
+      --radius:     10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(26,26,46,0.85);
+    }
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 1rem;
+      color: var(--green);
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .logo-dollar {
+      width: 28px; height: 28px;
+      background: var(--green); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg); font-size: 0.9rem; font-weight: 700;
+    }
+    main {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative; z-index: 1;
+    }
+    main::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 48px 48px; pointer-events: none;
+    }
+    main > * { position: relative; z-index: 1; }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); padding: 6px 18px;
+      border-radius: 999px; margin-bottom: 28px; display: inline-block;
+      animation: fadeUp 0.5s ease both;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+      line-height: 1.05; letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+    .sub {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
+      color: var(--muted); max-width: 420px; line-height: 1.75;
+      margin-bottom: 40px;
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+    /* FORM */
+    .form-wrap {
+      width: 100%; max-width: 420px;
+      animation: fadeUp 0.5s ease 0.3s both;
+    }
+    .form-inner { display: flex; gap: 8px; margin-bottom: 0; }
+    input[type="email"] {
+      flex: 1; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 16px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
+      color: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="email"]::placeholder { color: var(--muted); }
+    input[type="email"]:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-dim); }
+    .btn-unsub {
+      background: rgba(255,107,107,0.15); color: var(--red);
+      border: 1px solid rgba(255,107,107,0.3);
+      border-radius: var(--radius); padding: 13px 22px;
+      font-family: 'Cabinet Grotesk', sans-serif; font-size: 0.88rem; font-weight: 800;
+      cursor: pointer; white-space: nowrap; transition: background 0.15s, transform 0.15s;
+    }
+    .btn-unsub:hover { background: rgba(255,107,107,0.25); transform: translateY(-1px); }
+    /* STATES */
+    .msg {
+      display: none; border-radius: var(--radius); padding: 13px 16px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-align: center;
+      margin-top: 12px;
+    }
+    .msg.success { background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.25); color: var(--green); }
+    .msg.error   { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.25); color: var(--red); }
+    .gdpr-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+      color: var(--muted); max-width: 420px; line-height: 1.7;
+      margin-top: 20px; text-align: center;
+      animation: fadeUp 0.5s ease 0.4s both;
+    }
+    .gdpr-note a { color: var(--muted); text-decoration: underline; }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .form-inner { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+</nav>
+
+<main>
+  <div class="eyebrow">Unsubscribe</div>
+  <h1>Leave the waitlist</h1>
+  <p class="sub">
+    Enter your email address and we'll remove you from the MRRbar waitlist immediately.
+  </p>
+
+  <div class="form-wrap">
+    <div class="form-inner" id="formInner">
+      <input type="email" id="emailInput" placeholder="your@email.com" />
+      <button class="btn-unsub" onclick="handleUnsubscribe()">Remove me</button>
+    </div>
+    <div class="msg success" id="msgSuccess">
+      ✓ Done — you've been removed from the waitlist.
+    </div>
+    <div class="msg error" id="msgError">
+      Something went wrong — please try again or contact us.
+    </div>
+  </div>
+
+  <p class="gdpr-note">
+    Your email address will be removed from our waitlist in accordance with Art. 7(3) GDPR.<br>
+    For details see our <a href="/privacy">Privacy Policy</a>.
+  </p>
+</main>
+
+<footer>
+  <a href="/" class="logo" style="text-decoration:none;">
+    <div class="logo-dollar">$</div>
+    MRRbar
+  </a>
+  <div class="footer-links">
+    <a href="/imprint">Imprint</a>
+    <a href="/privacy">Privacy</a>
+    <a href="https://mein.online-impressum.de/buildonvibes/#Zweiter_Kontaktweg">Contact</a>
+  </div>
+</footer>
+
+<script>
+  async function handleUnsubscribe() {
+    const emailEl = document.getElementById('emailInput');
+    const email   = emailEl.value.trim();
+
+    if (!email || !email.includes('@')) {
+      emailEl.style.borderColor = 'var(--red)';
+      setTimeout(() => emailEl.style.borderColor = '', 1500);
+      return;
+    }
+
+    const formInner  = document.getElementById('formInner');
+    const msgSuccess = document.getElementById('msgSuccess');
+    const msgError   = document.getElementById('msgError');
+
+    formInner.style.display = 'none';
+
+    try {
+      const res = await fetch('https://mrrbar-brevo.padkon.workers.dev/api/unsubscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok || res.status === 204) {
+        msgSuccess.style.display = 'block';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      formInner.style.display = '';
+      msgError.style.display  = 'block';
+      setTimeout(() => msgError.style.display = 'none', 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
