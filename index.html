@@ -364,7 +364,8 @@
     }
     .lightbox.open { display: flex; }
     .lightbox-img {
-      max-width: 100%; max-height: 90vh;
+      max-width: calc(100vw - 120px);
+      max-height: calc(100vh - 80px);
       width: auto; height: auto;
       border-radius: 12px;
       box-shadow: 0 30px 100px rgba(0,0,0,0.8);
@@ -423,14 +424,14 @@
       footer { flex-direction: column; align-items: flex-start; }
       .divider { margin: 0 20px; }
       .screenshots { padding: 50px 16px; }
-      .carousel-wrap { padding-bottom: 0; max-width: 480px; }
-      .carousel-track-outer { border-radius: 10px; }
+      .carousel-wrap { padding-bottom: 0; max-width: 380px; }
+      .carousel-track-outer { border-radius: 14px; }
+      .carousel-slide img { aspect-ratio: 4/5; }
       .carousel-btn { width: 36px; height: 36px; font-size: 0.9rem; top: auto; bottom: -52px; transform: none; }
       .carousel-btn.prev { left: calc(50% - 52px); }
       .carousel-btn.next { right: calc(50% - 52px); }
       .carousel-dots { margin-top: 64px; }
       .carousel-caption { margin-top: 12px; font-size: 0.68rem; }
-      .carousel-expand-hint { top: 8px; right: 8px; padding: 4px 8px; font-size: 0.6rem; }
       .lightbox-nav { width: 40px; height: 40px; font-size: 1rem; }
       .lightbox-nav.prev { left: 8px; }
       .lightbox-nav.next { right: 8px; }
@@ -621,15 +622,44 @@
   <div class="carousel-wrap">
     <button class="carousel-btn prev" onclick="carousel(-1)">&#8592;</button>
     <button class="carousel-btn next" onclick="carousel(1)">&#8594;</button>
-    <div class="carousel-expand-hint">Tap to expand</div>
     <div class="carousel-track-outer">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-metrics.jpg" alt="MRR, ARR and revenue metrics" loading="lazy" onclick="openLightbox(0)"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-setup.jpg" alt="Setup in 30 seconds" loading="lazy" onclick="openLightbox(1)"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-promo-tile.jpg" alt="MRRbar – Live revenue in your toolbar" loading="lazy" onclick="openLightbox(2)"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-privacy.jpg" alt="Privacy first" loading="lazy" onclick="openLightbox(3)"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-achievements.jpg" alt="Achievement system" loading="lazy" onclick="openLightbox(4)"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg" alt="MRRbar toolbar badge and popup" loading="lazy" onclick="openLightbox(5)"></div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-1-metrics.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-metrics.jpg" alt="MRR, ARR and revenue metrics" loading="lazy" onclick="openLightbox(0)">
+        </picture>
+      </div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-2-setup.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-setup.jpg" alt="Setup in 30 seconds" loading="lazy" onclick="openLightbox(1)">
+        </picture>
+      </div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-3-promo.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-promo-tile.jpg" alt="MRRbar – Live revenue in your toolbar" loading="lazy" onclick="openLightbox(2)">
+        </picture>
+      </div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-4-privacy.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-privacy.jpg" alt="Privacy first" loading="lazy" onclick="openLightbox(3)">
+        </picture>
+      </div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-5-achievements.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-achievements.jpg" alt="Achievement system" loading="lazy" onclick="openLightbox(4)">
+        </picture>
+      </div>
+      <div class="carousel-slide">
+        <picture>
+          <source media="(max-width: 600px)" srcset="screenshots/mobile-6-toolbar.jpg">
+          <img src="screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg" alt="MRRbar toolbar badge and popup" loading="lazy" onclick="openLightbox(5)">
+        </picture>
+      </div>
     </div></div>
     <div class="carousel-dots" id="carouselDots">
       <div class="carousel-dot active" onclick="goTo(0)"></div>
@@ -696,10 +726,19 @@
     'screenshots/mrrbar-revenue-tracker-achievements.jpg',
     'screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg'
   ];
+  const mobileSources = [
+    'screenshots/mobile-1-metrics.jpg',
+    'screenshots/mobile-2-setup.jpg',
+    'screenshots/mobile-3-promo.jpg',
+    'screenshots/mobile-4-privacy.jpg',
+    'screenshots/mobile-5-achievements.jpg',
+    'screenshots/mobile-6-toolbar.jpg'
+  ];
   let lightboxIndex = 0;
   function openLightbox(i) {
     lightboxIndex = i;
-    document.getElementById('lightboxImg').src = slideSources[i];
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+    document.getElementById('lightboxImg').src = isMobile ? mobileSources[i] : slideSources[i];
     document.getElementById('lightboxCaption').textContent = captions[i];
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -715,7 +754,8 @@
   function lightboxNav(e, dir) {
     e.stopPropagation();
     lightboxIndex = (lightboxIndex + dir + total) % total;
-    document.getElementById('lightboxImg').src = slideSources[lightboxIndex];
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+    document.getElementById('lightboxImg').src = isMobile ? mobileSources[lightboxIndex] : slideSources[lightboxIndex];
     document.getElementById('lightboxCaption').textContent = captions[lightboxIndex];
   }
   // Lightbox swipe
