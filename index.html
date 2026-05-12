@@ -326,21 +326,28 @@
     .screenshots { padding: 80px 24px; text-align: center; }
     .screenshots .section-tag { text-align: center; margin-bottom: 16px; }
     .screenshots h2 { font-size: clamp(1.8rem,4vw,3rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 48px; }
-    .carousel-wrap { position: relative; max-width: 900px; margin: 0 auto; }
+    .carousel-wrap { position: relative; max-width: 720px; margin: 0 auto; }
     .carousel-track-outer {
-      overflow: hidden; border-radius: 14px;
+      width: 100%; overflow: hidden; border-radius: 14px; position: relative;
       box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
     }
     .carousel-track {
-      display: flex; width: 100%;
+      display: flex;
       transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
     }
     .carousel-slide {
-      min-width: 100%; flex-shrink: 0;
+      min-width: 100%; max-width: 100%; flex-shrink: 0; flex-grow: 0;
+    }
+    .carousel-slide picture, .carousel-slide picture img {
+      width: 100%; display: block;
     }
     .carousel-slide img {
-      width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover;
+      width: 100%; display: block; aspect-ratio: 4/5; object-fit: cover;
       cursor: zoom-in;
+    }
+    @media (min-width: 901px) {
+      .carousel-slide img { aspect-ratio: 16/10; }
     }
     .carousel-expand-hint {
       position: absolute; top: 12px; right: 12px; z-index: 3;
@@ -626,37 +633,37 @@
     <div class="carousel-track" id="carouselTrack">
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-1-metrics.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-1-metrics.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-metrics.jpg" alt="MRR, ARR and revenue metrics" loading="lazy" onclick="openLightbox(0)">
         </picture>
       </div>
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-2-setup.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-2-setup.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-setup.jpg" alt="Setup in 30 seconds" loading="lazy" onclick="openLightbox(1)">
         </picture>
       </div>
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-3-promo.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-3-promo.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-promo-tile.jpg" alt="MRRbar – Live revenue in your toolbar" loading="lazy" onclick="openLightbox(2)">
         </picture>
       </div>
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-4-privacy.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-4-privacy.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-privacy.jpg" alt="Privacy first" loading="lazy" onclick="openLightbox(3)">
         </picture>
       </div>
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-5-achievements.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-5-achievements.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-achievements.jpg" alt="Achievement system" loading="lazy" onclick="openLightbox(4)">
         </picture>
       </div>
       <div class="carousel-slide">
         <picture>
-          <source media="(max-width: 600px)" srcset="screenshots/mobile-6-toolbar.jpg">
+          <source media="(max-width: 900px)" srcset="screenshots/mobile-6-toolbar.jpg">
           <img src="screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg" alt="MRRbar toolbar badge and popup" loading="lazy" onclick="openLightbox(5)">
         </picture>
       </div>
