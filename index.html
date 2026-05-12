@@ -340,7 +340,59 @@
     }
     .carousel-slide img {
       width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover;
+      cursor: zoom-in;
     }
+    .carousel-expand-hint {
+      position: absolute; top: 12px; right: 12px; z-index: 3;
+      background: rgba(26,26,46,0.85); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 10px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+      color: var(--muted); pointer-events: none;
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; gap: 6px;
+      opacity: 0.85;
+    }
+    .carousel-expand-hint::before { content: '⤢'; color: var(--green); font-size: 0.9rem; }
+
+    /* LIGHTBOX MODAL */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(20px);
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 100%; max-height: 90vh;
+      width: auto; height: auto;
+      border-radius: 12px;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(26,26,46,0.9); border: 1px solid var(--border);
+      color: var(--white); font-size: 1.3rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close:hover { background: var(--card); color: var(--green); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(26,26,46,0.9); border: 1px solid var(--border);
+      color: var(--white); font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-nav:hover { background: var(--card); color: var(--green); }
+    .lightbox-nav.prev { left: 20px; }
+    .lightbox-nav.next { right: 20px; }
+    .lightbox-caption {
+      position: absolute; bottom: 24px; left: 0; right: 0; text-align: center;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted);
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .carousel-caption {
       font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
       color: var(--muted); margin-top: 16px; letter-spacing: 0.04em;
@@ -370,13 +422,19 @@
       .form-inner { flex-direction: column; }
       footer { flex-direction: column; align-items: flex-start; }
       .divider { margin: 0 20px; }
-      .screenshots { padding: 60px 8px; }
-      .carousel-wrap { padding-bottom: 0; }
+      .screenshots { padding: 50px 16px; }
+      .carousel-wrap { padding-bottom: 0; max-width: 480px; }
+      .carousel-track-outer { border-radius: 10px; }
       .carousel-btn { width: 36px; height: 36px; font-size: 0.9rem; top: auto; bottom: -52px; transform: none; }
       .carousel-btn.prev { left: calc(50% - 52px); }
       .carousel-btn.next { right: calc(50% - 52px); }
       .carousel-dots { margin-top: 64px; }
-      .carousel-caption { margin-top: 12px; }
+      .carousel-caption { margin-top: 12px; font-size: 0.68rem; }
+      .carousel-expand-hint { top: 8px; right: 8px; padding: 4px 8px; font-size: 0.6rem; }
+      .lightbox-nav { width: 40px; height: 40px; font-size: 1rem; }
+      .lightbox-nav.prev { left: 8px; }
+      .lightbox-nav.next { right: 8px; }
+      .lightbox-close { top: 12px; right: 12px; width: 40px; height: 40px; }
     }
   </style>
   <script defer src="https://api.pirsch.io/pa.js" id="pianjs" data-code="nfjZSZx4DLssW7tgxAnGMU3O720YFAoR"></script>
@@ -563,14 +621,15 @@
   <div class="carousel-wrap">
     <button class="carousel-btn prev" onclick="carousel(-1)">&#8592;</button>
     <button class="carousel-btn next" onclick="carousel(1)">&#8594;</button>
+    <div class="carousel-expand-hint">Tap to expand</div>
     <div class="carousel-track-outer">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-metrics.jpg" alt="MRR, ARR and revenue metrics" loading="lazy"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-setup.jpg" alt="Setup in 30 seconds" loading="lazy"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-promo-tile.jpg" alt="MRRbar – Live revenue in your toolbar" loading="lazy"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-privacy.jpg" alt="Privacy first" loading="lazy"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-achievements.jpg" alt="Achievement system" loading="lazy"></div>
-      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg" alt="MRRbar toolbar badge and popup" loading="lazy"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-metrics.jpg" alt="MRR, ARR and revenue metrics" loading="lazy" onclick="openLightbox(0)"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-setup.jpg" alt="Setup in 30 seconds" loading="lazy" onclick="openLightbox(1)"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-promo-tile.jpg" alt="MRRbar – Live revenue in your toolbar" loading="lazy" onclick="openLightbox(2)"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-privacy.jpg" alt="Privacy first" loading="lazy" onclick="openLightbox(3)"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-achievements.jpg" alt="Achievement system" loading="lazy" onclick="openLightbox(4)"></div>
+      <div class="carousel-slide"><img src="screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg" alt="MRRbar toolbar badge and popup" loading="lazy" onclick="openLightbox(5)"></div>
     </div></div>
     <div class="carousel-dots" id="carouselDots">
       <div class="carousel-dot active" onclick="goTo(0)"></div>
@@ -583,6 +642,15 @@
     <div class="carousel-caption" id="carouselCaption">Your revenue. Always visible.</div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event, true)">&times;</button>
+  <button class="lightbox-nav prev" onclick="lightboxNav(event, -1)">&#8592;</button>
+  <button class="lightbox-nav next" onclick="lightboxNav(event, 1)">&#8594;</button>
+  <img class="lightbox-img" id="lightboxImg" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
 
 <script>
   const captions = [
@@ -618,6 +686,54 @@
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 40) { carousel(dx < 0 ? 1 : -1); resetAutoplay(); }
   }, { passive: true });
+
+  // Lightbox
+  const slideSources = [
+    'screenshots/mrrbar-revenue-tracker-metrics.jpg',
+    'screenshots/mrrbar-revenue-tracker-setup.jpg',
+    'screenshots/mrrbar-revenue-tracker-promo-tile.jpg',
+    'screenshots/mrrbar-revenue-tracker-privacy.jpg',
+    'screenshots/mrrbar-revenue-tracker-achievements.jpg',
+    'screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg'
+  ];
+  let lightboxIndex = 0;
+  function openLightbox(i) {
+    lightboxIndex = i;
+    document.getElementById('lightboxImg').src = slideSources[i];
+    document.getElementById('lightboxCaption').textContent = captions[i];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    clearInterval(autoplay);
+  }
+  function closeLightbox(e, force) {
+    if (force || e.target.id === 'lightbox') {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+      resetAutoplay();
+    }
+  }
+  function lightboxNav(e, dir) {
+    e.stopPropagation();
+    lightboxIndex = (lightboxIndex + dir + total) % total;
+    document.getElementById('lightboxImg').src = slideSources[lightboxIndex];
+    document.getElementById('lightboxCaption').textContent = captions[lightboxIndex];
+  }
+  // Lightbox swipe
+  let lbStartX = 0;
+  const lb = document.getElementById('lightbox');
+  lb.addEventListener('touchstart', e => { lbStartX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbStartX;
+    if (Math.abs(dx) > 40) lightboxNav({stopPropagation:()=>{}}, dx < 0 ? 1 : -1);
+  }, { passive: true });
+  // Esc to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox(null, true);
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lightboxNav({stopPropagation:()=>{}}, -1);
+      if (e.key === 'ArrowRight') lightboxNav({stopPropagation:()=>{}}, 1);
+    }
+  });
 </script>
 
 <!-- FEATURES -->
