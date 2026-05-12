@@ -124,28 +124,28 @@
       opacity: 0.35; flex-shrink: 0;
     }
     .chrome-ext-mrrbar {
-      position: relative; display: inline-flex;
-      width: 28px; height: 28px; border-radius: 4px;
-      background: #1a1a2e; border: 1px solid rgba(0,255,136,0.25);
+      display: inline-flex; position: relative;
+      width: 28px; height: 28px; border-radius: 5px;
+      background: #111120;
       align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .mrrbar-icon-text {
-      font-family: 'IBM Plex Mono', monospace; font-size: 13px;
-      font-weight: 700; color: #00ff88; line-height: 1;
-    }
-    /* ANIMATED BADGE */
-    .mrrbar-badge-wrap {
-      position: absolute; bottom: -5px; right: -12px; z-index: 10;
-    }
-    .badge-state {
-      position: absolute; bottom: 0; right: 0;
-      background: #1a1a2e; border: 1px solid rgba(0,255,136,0.5);
-      border-radius: 3px; padding: 1px 4px; font-size: 9px;
-      color: #00ff88; font-family: monospace; font-weight: 700;
-      white-space: nowrap; line-height: 1.2;
+    .icon-state {
+      position: absolute;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1px;
       opacity: 0; transition: opacity 0.4s ease;
     }
-    .badge-state.active { opacity: 1; }
+    .icon-state.active { opacity: 1; }
+    .icon-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 5.5px; font-weight: 600;
+      color: #00ff88; line-height: 1; letter-spacing: 0.04em;
+    }
+    .icon-value {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; font-weight: 700;
+      color: #00ff88; line-height: 1;
+    }
     /* MODE LABEL */
     .toolbar-mode-label {
       display: flex; align-items: center; gap: 8px;
@@ -358,10 +358,13 @@
       <div class="chrome-ext-plain" style="background:#e05252;"></div>
       <div class="chrome-ext-plain" style="background:#3a3a4a;"></div>
       <div class="chrome-ext-mrrbar">
-        <span class="mrrbar-icon-text">$</span>
-        <div class="mrrbar-badge-wrap">
-          <div class="badge-state active" id="badgeMrr">$2.8k</div>
-          <div class="badge-state" id="badgeToday">$340</div>
+        <div class="icon-state active" id="iconMrr">
+          <span class="icon-label">MRR</span>
+          <span class="icon-value">$2.8k</span>
+        </div>
+        <div class="icon-state" id="iconToday">
+          <span class="icon-label">TDY</span>
+          <span class="icon-value">$340</span>
         </div>
       </div>
       <div class="chrome-ext-plain" style="background:#3a3a4a;"></div>
@@ -610,18 +613,18 @@
 </footer>
 
 <script>
-  /* BADGE TOGGLE ANIMATION */
+  /* ICON TOGGLE ANIMATION */
   (function() {
-    const badgeMrr   = document.getElementById('badgeMrr');
-    const badgeToday = document.getElementById('badgeToday');
+    const iconMrr    = document.getElementById('iconMrr');
+    const iconToday  = document.getElementById('iconToday');
     const labelMrr   = document.getElementById('labelMrr');
     const labelToday = document.getElementById('labelToday');
     let showingMrr = true;
 
     function toggle() {
       showingMrr = !showingMrr;
-      badgeMrr.classList.toggle('active', showingMrr);
-      badgeToday.classList.toggle('active', !showingMrr);
+      iconMrr.classList.toggle('active', showingMrr);
+      iconToday.classList.toggle('active', !showingMrr);
       labelMrr.classList.toggle('active', showingMrr);
       labelToday.classList.toggle('active', !showingMrr);
     }
