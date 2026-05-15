@@ -165,9 +165,9 @@
 
 <main>
   <div class="eyebrow">Unsubscribe</div>
-  <h1>Leave the waitlist</h1>
+  <h1>Unsubscribe from MRRbar</h1>
   <p class="sub">
-    Enter your email address and we'll remove you from the MRRbar waitlist immediately.
+    Enter your email and we'll remove you from our mailing list immediately. No questions asked.
   </p>
 
   <div class="form-wrap">
@@ -176,7 +176,7 @@
       <button class="btn-unsub" onclick="handleUnsubscribe()">Remove me</button>
     </div>
     <div class="msg success" id="msgSuccess">
-      ✓ Done — you've been removed from the waitlist.
+      ✓ Done — you've been removed from our mailing list.
     </div>
     <div class="msg error" id="msgError">
       Something went wrong — please try again or contact us.
@@ -202,6 +202,13 @@
 </footer>
 
 <script>
+  // Pre-fill email from ?email= URL param (e.g. link in launch email)
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    if (email) document.getElementById('emailInput').value = decodeURIComponent(email);
+  })();
+
   async function handleUnsubscribe() {
     const emailEl = document.getElementById('emailInput');
     const email   = emailEl.value.trim();
