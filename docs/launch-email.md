@@ -31,7 +31,7 @@ It's live. MRRbar is on the Chrome Web Store — free. See your Stripe MRR right
 
 Hey,
 
-You signed up for MRRbar a while back. I've been heads-down building — and today it's finally live.
+You signed up for MRRbar. I've been heads-down building — and today it's finally live.
 
 **MRRbar is now on the Chrome Web Store. Free.**
 
