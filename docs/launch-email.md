@@ -25,8 +25,6 @@ It's live. MRRbar is on the Chrome Web Store — free. See your Stripe MRR right
 
 **[MRRbar logo]**
 
-**[Hero image: toolbar dark screenshot]**
-
 > 🚀 IT'S LIVE
 
 ### Your revenue is now in your toolbar.
@@ -71,5 +69,4 @@ Built by one person, for indie founders.
 
 ## Images used
 
-- Hero: `https://mrr.bar/screenshots/mrrbar-revenue-tracker-toolbar-dark.jpg`
 - Metrics: `https://mrr.bar/screenshots/mrrbar-revenue-tracker-metrics.jpg`
