@@ -493,7 +493,7 @@
     MRRbar shows MRR, today's revenue &amp; new sales<br>right in your browser toolbar — in real time.
   </p>
 
-  <!-- CTA -->
+  <!-- PRIMARY CTA -->
   <div class="form-wrap" style="animation:fadeUp 0.7s ease 0.35s both;">
     <a href="https://chromewebstore.google.com/detail/fgjhljpmbicgfpcdfcpiemfaaefcoold"
        class="btn-install" target="_blank" rel="noopener">
@@ -501,20 +501,6 @@
       Install on Chrome — it's free
     </a>
     <p class="trust-line" style="margin-top:10px;">Free &nbsp;·&nbsp; No account &nbsp;·&nbsp; 30-second setup</p>
-    <div class="email-divider" style="margin-top:18px;">Not on Chrome? Stay in the loop:</div>
-    <div class="form-inner" id="formInner1" style="margin-top:10px;">
-      <input type="email" id="emailInput" placeholder="your@email.com" />
-      <button class="btn-cta" onclick="handleSubmit('emailInput','gdpr','successMsg','formInner1','formGdpr1')">Keep me posted</button>
-    </div>
-    <div class="form-gdpr" id="formGdpr1" style="margin-top:8px;">
-      <input type="checkbox" id="gdpr" />
-      <label for="gdpr">
-        I agree to the <a href="/privacy">Privacy Policy</a> and consent to my email address being processed to receive MRRbar product updates. Confirmation via double opt-in. I can withdraw my consent at any time via the unsubscribe link in any email.
-      </label>
-    </div>
-    <div class="success-msg" id="successMsg">
-      ✓ You're in! Check your inbox — confirmation email on its way.
-    </div>
   </div>
 
   <!-- TOOLBAR MOCK -->
@@ -616,6 +602,24 @@
       <div class="ach">🚀</div>
       <div class="ach">👑</div>
       <div class="ach">🗓️</div>
+    </div>
+  </div>
+
+  <!-- SECONDARY CTA — email for non-Chrome users -->
+  <div class="form-wrap" style="animation:fadeUp 0.7s ease 0.5s both;">
+    <div class="email-divider">Not on Chrome? Stay in the loop:</div>
+    <div class="form-inner" id="formInner1" style="margin-top:10px;">
+      <input type="email" id="emailInput" placeholder="your@email.com" />
+      <button class="btn-cta" onclick="handleSubmit('emailInput','gdpr','successMsg','formInner1','formGdpr1')">Keep me posted</button>
+    </div>
+    <div class="form-gdpr" id="formGdpr1" style="margin-top:8px;">
+      <input type="checkbox" id="gdpr" />
+      <label for="gdpr">
+        I agree to the <a href="/privacy">Privacy Policy</a> and consent to my email address being processed to receive MRRbar product updates. Confirmation via double opt-in. I can withdraw my consent at any time via the unsubscribe link in any email.
+      </label>
+    </div>
+    <div class="success-msg" id="successMsg">
+      ✓ You're in! Check your inbox — confirmation email on its way.
     </div>
   </div>
 
