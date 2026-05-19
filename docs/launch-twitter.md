@@ -12,7 +12,7 @@ No tab switching. No dashboard. Just the number — always visible.
 
 Free. Open source. Built in public.
 
-→ mrr.bar
+→ mrr.bar?utm_source=twitter&utm_medium=social&utm_campaign=launch
 ```
 
 ---
@@ -62,7 +62,7 @@ It's free. It's on the Chrome Web Store right now.
 
 If you're an indie founder who checks their dashboard too often — this is for you.
 
-→ Install: mrr.bar
+→ Install: mrr.bar?utm_source=twitter&utm_medium=social&utm_campaign=launch
 → Source: github.com/padfooty/MRRbar
 
 Would love your feedback 🙏
